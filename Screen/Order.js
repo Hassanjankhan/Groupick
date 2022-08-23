@@ -19,17 +19,21 @@ const Order = props => {
   const cart_type = useSelector(state => state.root.data ?.cart_type);
   const Data = [" ", " ", " "];
 
-  React.useEffect(async () => {
-    try {
-      const get = await API.get('/orders/delivered', {
-        headers: {
-          Authorization: `Bearer ${isToken}`,
-        }
-      })
-      setDeliveredOrder(get.data.orders);
-    } catch (error) {
-      console.log(error.message);
+  React.useEffect(() => {
+    const orderfetch = async () => {
+      try {
+        const get = await API.get('/orders/delivered', {
+          headers: {
+            Authorization: `Bearer ${isToken}`,
+          }
+        })
+        setDeliveredOrder(get.data.orders);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
+    orderfetch();
+
   }, []);
 
   return (

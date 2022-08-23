@@ -6,10 +6,10 @@ import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Foundation from "react-native-vector-icons/Foundation";
-import Order from "../Assets/IMages/Svg/order.svg";
-import Help from "../Assets/IMages/Svg/Help.svg";
-import Wish from "../Assets/IMages/Svg/wish.svg";
-import Earn from "../Assets/IMages/Svg/earn.svg";
+import Order from "../Assets/IMages/Svg/Order.js";
+import Help from "../Assets/IMages/Svg/Help.js";
+import Wish from "../Assets/IMages/Svg/wish.js";
+import Earn from "../Assets/IMages/Svg/Earn.js";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { handleTokenSession, handleUserBio } from "../Redux/dataReducer";
@@ -48,12 +48,12 @@ const Profile = ({ navigation }) => {
             backgroundColor: "white",
           }}
         >
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image
               style={{ height: 180, width: 180 }}
               source={user?.image ? {uri: user?.image} : require("../Assets/IMages/GropIMage/group_detail.png")}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Text
             style={{
               fontSize: 21,

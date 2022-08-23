@@ -158,7 +158,8 @@ const Wishlist = props => {
             imageData={imageData2}
             okey={true}
             num={2}
-            Next={props.navigation.navigate}
+            Next={(navigation,object)=>props.navigation.navigate(navigation,object)}
+            // Next={(navigation,object)=>props.navigation.navigate}
             // ScreenName={}
             heart={true}
           />

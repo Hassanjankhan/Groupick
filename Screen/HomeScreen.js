@@ -10,6 +10,7 @@ import {
   FlatList,
   Button,
   Modal,
+  Animated,
   Image,
   StyleSheet,
   TouchableOpacity,
@@ -26,7 +27,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import ImageSlider from 'react-native-image-slider';
 import Reconmended from "../Components/Reconmended";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
@@ -39,6 +40,7 @@ import HomeCategory from "../Components/homeCategory";
 import API from '../api/_api'
 import { handleCategories } from "../Redux/dataReducer";
 import FlashSellCart from "../Components/FlashSellCart";
+import Indicator from "../Components/Indicator";
 
 // This is Group 2
 const GroupData2 = [
@@ -302,7 +304,14 @@ const HomeScreen = props => {
     }
 
   }, [banner]);
+  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const [bannerImagesTest, setbannerImageTests] = useState([
+    { "image": require('../Assets/IMages/3.png'), id: "0", title: 'Welcome To fitoozone', detail: 'FitooZone has workouts on demand that you can find based on how much time you have' },
+    { "image": require('../Assets/IMages/3.png'), id: "1", title: 'welcome to the fitness zone', detail: 'Create and save your own custom workouts. Name your workouts, save them, and they’ll automatically appear when you’re ready to workout' },
+    { "image": require('../Assets/IMages/3.png'), id: "2", title: 'Custom Workouts', detail: 'Workout categories will help you gain strength, get in better shape and embrace a healthy lifestyle' },
 
+    // Local image
+  ])
   return (
     <View style={{ height: "100%", width: "100%" }}>
       <View
@@ -431,6 +440,58 @@ const HomeScreen = props => {
         {Checkindex == 0 ? (
           <View style={{}}>
             <View style={{ marginTop: 10 }} />
+            {/* <Indicator scrollX={scrollX} Data={bannerImagesTest} /> */}
+            {/* <ImageSlider images={[
+              'https://placeimg.com/640/640/nature',
+              'https://placeimg.com/640/640/people',
+              'https://placeimg.com/640/640/animals',
+              'https://placeimg.com/640/640/beer',
+            ]} /> */}
+            {/* <ImageSlider
+              loopBothSides
+              autoPlayWithInterval={3000}
+              images={[
+                'https://placeimg.com/640/640/nature',
+                'https://placeimg.com/640/640/people',
+                'https://placeimg.com/640/640/animals',
+                'https://placeimg.com/640/640/beer',
+              ]}
+              customSlide={({ index, item, style, width }) => (
+                // It's important to put style here because it's got offset inside
+                <View key={index} style={[style, styles.customSlide]}>
+                  <Image source={{ uri: item }} style={styles.customImage} />
+                </View>
+              )}
+              customButtons={(position, move) => (
+                <View style={styles.buttons}>
+                  {[
+                    'https://placeimg.com/640/640/nature',
+                    'https://placeimg.com/640/640/people',
+                    'https://placeimg.com/640/640/animals',
+                    'https://placeimg.com/640/640/beer',
+                  ].map((image, index) => {
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        underlayColor="#ccc"
+                        onPress={() => move(index)}
+                        style={styles.button}
+                      >
+                        <Text style={position === index && styles.buttonSelected}>
+                          {index + 1}
+                        </Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              )}
+            /> */}
+            <View style={{ height: 164.47, backgroundColor: 'red' }}>
+              <ImageSlider
+                autoPlayWithInterval={3000}
+                images={bannerImages} />
+
+            </View>
             {/* <SliderBox
               images={bannerImages}
               // images={bannerImages}
@@ -447,6 +508,7 @@ const HomeScreen = props => {
                 marginTop: 50,
               }}
             /> */}
+
             <View style={{ height: 10, marginTop: 10 }} />
             {/* Flash sell */}
             <View

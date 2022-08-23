@@ -6,6 +6,7 @@ import { Touchable } from "react-native";
 import Check1 from "../Components/Check1";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import BoyFlatlist from "../Components/BoyFlatlist";
+import ImageSlider from 'react-native-image-slider';
 const IMageSlider = [
   require("../Assets/IMages/NewScreen/First.png"),
   require("../Assets/IMages/NewScreen/First.png"),
@@ -98,7 +99,13 @@ const NewScreen = props => {
           </View>
         </View>
 
-        <SliderBox
+        <View style={{ height: 164.47, backgroundColor: 'red' }}>
+          <ImageSlider
+            autoPlayWithInterval={3000}
+            images={IMageSlider} />
+
+        </View>
+        {/* <SliderBox
           images={IMageSlider}
           sliderBoxHeight={164.47}
           resizeMethod={"resize"}
@@ -114,7 +121,7 @@ const NewScreen = props => {
 
             marginTop: 50,
           }}
-        />
+        /> */}
 
         <View style={{ flexDirection: "row", marginTop: 29 }}>
           <FlatList

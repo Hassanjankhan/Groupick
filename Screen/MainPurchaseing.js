@@ -74,14 +74,14 @@ const PRODUCT_SIZE = ["S", "M", "L", "XL", "XXL"];
 
 
 const MainPurchasing = ({ navigation, route }) => {
-  const user = useSelector(state => state?.auth.user);
-  const token = useSelector(state => state?.auth?.token);
+  const user = useSelector(state => state ?.auth.user);
+  const token = useSelector(state => state ?.auth ?.token);
   const dispatch = useDispatch();
   const { productData, similarProducts } = route.params;
-  let hasVariants = similarProducts.length === 0 ? productData : similarProducts[0]
+  let hasVariants = similarProducts ?.length === 0 ? productData : similarProducts && similarProducts[0] ? similarProducts[0] : null
   const [productDetail, setProductDetail] = React.useState(hasVariants);
 
-  const productImage = productDetail?.title_image;
+  const productImage = productDetail ?.title_image;
   const [text, onChangeText] = React.useState("");
   const [count, setCount] = React.useState(1);
   const [Slect, setSlect] = useState();
@@ -160,13 +160,13 @@ const MainPurchasing = ({ navigation, route }) => {
   */
   const addToCartProduct = () => {
     let productToBuy = {
-      id: productDetail?.id,
-      name: productDetail?.name,
-      title_image: productDetail?.title_image,
+      id: productDetail ?.id,
+      name: productDetail ?.name,
+      title_image: productDetail ?.title_image,
       size: PRODUCT_SIZE[Slect],
-      description: productDetail?.description,
-      mrp: productDetail?.mrp * count,
-      product_price: productDetail?.selling_price,
+      description: productDetail ?.description,
+      mrp: productDetail ?.mrp * count,
+      product_price: productDetail ?.selling_price,
     }
 
     // Close the BottomSheet
@@ -186,13 +186,13 @@ const MainPurchasing = ({ navigation, route }) => {
   */
   const buyGroupProduct = () => {
     let productToBuy = {
-      id: productDetail?.id,
-      name: productDetail?.name,
-      title_image: productDetail?.title_image,
+      id: productDetail ?.id,
+      name: productDetail ?.name,
+      title_image: productDetail ?.title_image,
       size: PRODUCT_SIZE[Slect],
-      description: productDetail?.description,
-      product_price: productDetail?.group_price * count,
-      mrp: productDetail?.mrp * count
+      description: productDetail ?.description,
+      product_price: productDetail ?.group_price * count,
+      mrp: productDetail ?.mrp * count
     }
 
     dispatch(handleCartType(2))
@@ -203,13 +203,13 @@ const MainPurchasing = ({ navigation, route }) => {
   // Call if user wants to join the group
   const joinSpecificGroup = () => {
     let productToBuy = {
-      id: productDetail?.id,
-      name: productDetail?.name,
-      title_image: productDetail?.title_image,
+      id: productDetail ?.id,
+      name: productDetail ?.name,
+      title_image: productDetail ?.title_image,
       size: PRODUCT_SIZE[Slect],
-      description: productDetail?.description,
-      product_price: productDetail?.group_price * count,
-      mrp: productDetail?.mrp * count,
+      description: productDetail ?.description,
+      product_price: productDetail ?.group_price * count,
+      mrp: productDetail ?.mrp * count,
     }
 
     // Add Product To Cart
@@ -251,7 +251,7 @@ const MainPurchasing = ({ navigation, route }) => {
           Authorization: `Bearer ${token}`,
         },
         data: {
-          user_id: user?.id
+          user_id: user ?.id
         }
       })
         .then(res => {
@@ -264,11 +264,11 @@ const MainPurchasing = ({ navigation, route }) => {
     }
   }
 
-  const percentOff = Number(100 - (productDetail?.group_price * 100 / productDetail?.mrp)).toFixed(0);
+  const percentOff = Number(100 - (productDetail ?.group_price * 100 / productDetail ?.mrp)).toFixed(0);
 
-  let PRODUCT_IMAGE = productDetail?.title_image ? { uri: productDetail?.title_image } : require('../Assets/IMages/GropIMage/group_detail.png')
+  let PRODUCT_IMAGE = productDetail ?.title_image ? { uri: productDetail ?.title_image } : require('../Assets/IMages/GropIMage/group_detail.png')
 
-  let USER_ICON = singleGroupToJoin?.image ? { uri: singleGroupToJoin?.image } : require('../Assets/IMages/GropIMage/group_detail.png')
+  let USER_ICON = singleGroupToJoin ?.image ? { uri: singleGroupToJoin ?.image } : require('../Assets/IMages/GropIMage/group_detail.png')
 
   return (
     <View>
@@ -283,7 +283,7 @@ const MainPurchasing = ({ navigation, route }) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("FullIMageScreen", {
-                    productImage: productDetail?.previews
+                    productImage: productDetail ?.previews
                   })
                 }
               >
@@ -405,10 +405,10 @@ const MainPurchasing = ({ navigation, route }) => {
                     Similar Product
                   </Text>
                   <View style={{ flexDirection: 'row' }}>
-                    {similarProducts?.map((variant, index) => {
+                    {similarProducts ?.map((variant, index) => {
                       return (
                         <Pressable key={index} onPress={() => setProductDetail(variant)}>
-                          {variant?.title_image !== null &&
+                          {variant ?.title_image !== null &&
                             <Image
                               style={{
                                 marginRight: 10,
@@ -416,7 +416,7 @@ const MainPurchasing = ({ navigation, route }) => {
                                 borderRadius: 7,
                                 width: 53,
                               }}
-                              source={{ uri: variant?.title_image }}
+                              source={{ uri: variant ?.title_image }}
                             />
                           }
                         </Pressable>
@@ -437,7 +437,7 @@ const MainPurchasing = ({ navigation, route }) => {
                       color: "#969696",
                     }}
                   >
-                    {productDetail.name}
+                    {productDetail?.name}
                   </Text>
                   <View style={{ height: 10 }} />
                   <View
@@ -453,7 +453,7 @@ const MainPurchasing = ({ navigation, route }) => {
                         textDecorationLine: "line-through",
                       }}
                     >
-                      MRP {productDetail.mrp}
+                      MRP {productDetail?.mrp}
                     </Text>
                     <Text
                       style={{
@@ -525,19 +525,19 @@ const MainPurchasing = ({ navigation, route }) => {
                     * ##
                   */}
               <View>
-                {_groups?.length !== 0 &&
+                {_groups ?.length !== 0 &&
                   <View>
                     <OngoingGroups
                       user={user}
                       GROUP={_groups}
-                      PRODUCT_ID={productDetail?.id}
+                      PRODUCT_ID={productDetail ?.id}
                       setJoinGroup={setJoinGroup}
                       join_group={join_group}
                       OpenPurching={OpenPurching}
                     />
                   </View>}
               </View>
-              {/* ************************* */}              
+              {/* ************************* */}
 
               {/* Description */}
               <View style={{ height: 14 }} />
@@ -603,7 +603,7 @@ const MainPurchasing = ({ navigation, route }) => {
                       color: "grey",
                     }}
                   >
-                    country : {productDetail?.country}
+                    country : {productDetail ?.country}
                   </Text>
                   <Text
                     style={{
@@ -611,7 +611,7 @@ const MainPurchasing = ({ navigation, route }) => {
                       color: "grey",
                     }}
                   >
-                    Brand : {productDetail?.brand}
+                    Brand : {productDetail ?.brand}
                   </Text>
                   <Text
                     style={{
@@ -619,7 +619,7 @@ const MainPurchasing = ({ navigation, route }) => {
                       color: "grey",
                     }}
                   >
-                    Features : {productDetail?.features}
+                    Features : {productDetail ?.features}
                   </Text>
                 </View>
               </View>
@@ -976,7 +976,7 @@ const MainPurchasing = ({ navigation, route }) => {
                           color: "white",
                         }}
                       >
-                        ₹ {productDetail?.selling_price}
+                        ₹ {productDetail ?.selling_price}
                       </Text>
                       <Text
                         style={{
@@ -1019,7 +1019,7 @@ const MainPurchasing = ({ navigation, route }) => {
                             ₹ {productBuyingType === 'Individual' ? productDetail.selling_price : productDetail.group_price}
                           </Text>
                         </View>
-                        <Text>{productDetail?.name}</Text>
+                        <Text>{productDetail ?.name}</Text>
                         <View
                           style={{
                             height: "5%",
@@ -1034,7 +1034,7 @@ const MainPurchasing = ({ navigation, route }) => {
                           }}
                         >
                           <Image
-                            source={{ uri: productDetail?.title_image }}
+                            source={{ uri: productDetail ?.title_image }}
                             style={{
                               width: 210,
                               height: 210,
@@ -1064,10 +1064,10 @@ const MainPurchasing = ({ navigation, route }) => {
                           <View style={{ width: "5%" }} />
                           {/* Different Color */}
                           <View style={{ flexDirection: 'row' }}>
-                            {similarProducts?.map((variant, index) => {
+                            {similarProducts ?.map((variant, index) => {
                               return (
                                 <Pressable key={index} onPress={() => setProductDetail(variant)}>
-                                  {variant?.title_image !== null &&
+                                  {variant ?.title_image !== null &&
                                     <Image
                                       style={{
                                         marginRight: 10,
@@ -1075,7 +1075,7 @@ const MainPurchasing = ({ navigation, route }) => {
                                         borderRadius: 7,
                                         width: 53,
                                       }}
-                                      source={{ uri: variant?.title_image }}
+                                      source={{ uri: variant ?.title_image }}
                                     />
                                   }
                                 </Pressable>
@@ -1320,7 +1320,7 @@ const MainPurchasing = ({ navigation, route }) => {
               <OngoingGroups
                 show={handleShowAll}
                 GROUP={_groups}
-                PRODUCT_ID={productDetail?.id}
+                PRODUCT_ID={productDetail ?.id}
                 setJoinGroup={setJoinGroup}
                 join_group={join_group}
                 OpenPurching={OpenPurching}
@@ -1348,7 +1348,7 @@ const MainPurchasing = ({ navigation, route }) => {
                   marginBottom: 10,
                 }}
               >
-                <Text>Item :{ }</Text>
+                <Text>Item :{}</Text>
                 <View style={{ width: "78%" }} />
                 <TouchableOpacity onPress={() => setSingleGroupToJoin('')}>
                   <AntDesign1 name={"close"} size={20} />
@@ -1378,7 +1378,7 @@ const MainPurchasing = ({ navigation, route }) => {
                 />
                 <View style={{ marginLeft: 5 }}>
                   <View style={{ flexDirection: "row", marginLeft: 5 }}>
-                    <Text>{productDetail?.name}</Text>
+                    <Text>{productDetail ?.name}</Text>
                     <View style={{ width: "15%" }} />
                     <TouchableOpacity>
                       <MaterialCommunityIcons
@@ -1391,10 +1391,10 @@ const MainPurchasing = ({ navigation, route }) => {
                     <Text>Free Delivery</Text>
                     {/* <Text>Size : {PRODUCT_SIZE[Slect] || 'M'}</Text> */}
                     <View style={{ flexDirection: "row" }}>
-                      <Text style={{ fontWeight: "bold" }}>₹ {productDetail?.group_price}</Text>
+                      <Text style={{ fontWeight: "bold" }}>₹ {productDetail ?.group_price}</Text>
                       <View style={{ width: "3%" }} />
                       <Text style={{ textDecorationLine: "line-through" }}>
-                        ₹ {productDetail?.mrp}
+                        ₹ {productDetail ?.mrp}
                       </Text>
                       <View style={{ width: "3%" }} />
                       <Text
@@ -1537,7 +1537,7 @@ const MainPurchasing = ({ navigation, route }) => {
                         marginTop: "3%",
                       }}
                     >
-                      {singleGroupToJoin?.name} 2/2 members
+                      {singleGroupToJoin ?.name} 2/2 members
                     </Text>
                     <View
                       style={{
@@ -1559,7 +1559,7 @@ const MainPurchasing = ({ navigation, route }) => {
                           width: 63,
                           borderRadius: 31,
                         }}
-                        source={user?.image !== null ? { uri: user?.image } : require('../Assets/IMages/GropIMage/group_detail.png')}
+                        source={user ?.image !== null ? { uri: user ?.image } : require('../Assets/IMages/GropIMage/group_detail.png')}
                       />
 
 
@@ -1571,7 +1571,7 @@ const MainPurchasing = ({ navigation, route }) => {
                         marginTop: "10%",
                       }}
                     >
-                      Message from {singleGroupToJoin?.data.name}
+                      Message from {singleGroupToJoin ?.data.name}
                     </Text>
 
                     <Text
@@ -1583,7 +1583,7 @@ const MainPurchasing = ({ navigation, route }) => {
                         marginTop: "3%",
                       }}
                     >
-                      {singleGroupToJoin?.data.description}
+                      {singleGroupToJoin ?.data.description}
                     </Text>
                     <View
                       style={{

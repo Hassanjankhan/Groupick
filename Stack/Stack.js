@@ -5,7 +5,6 @@ import {
 import First from "../Screen/First";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Second from "../Screen/Second";
-import LOgin from "../Screen/LOgin";
 
 import Login1 from "../Screen/Login1";
 import DetailsScreen from "../Screen/DetailsScreen";
@@ -45,6 +44,7 @@ import PrivacyPolicy from "../Screen/PrivacyPolicy";
 import RefundPolicy from "../Screen/RefundPolicy";
 import TermsAndCondition from "../Screen/TermsAndCondition";
 import CreateGroup from "../Screen/CreateGroup";
+import LOgin from "../Screen/LOgin";
 
 const Stack1 = createNativeStackNavigator();
 
